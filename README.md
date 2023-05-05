@@ -1,71 +1,56 @@
-# Getting Started with Create React App
+# chatProject!
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+### 프로젝트 기간 & 인원
 
-## Available Scripts
+<p>2023.05.05 ~ 
+</p>
+</br>
 
-In the project directory, you can run:
+### 배포링크
 
-### `npm start`
+https://
+</br>
+파이어베이스 배포예정
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+</br>
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+### 블로그
 
-### `npm test`
+https://minhhk.tistory.com/category/ChatProject
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+</br>
 
-### `npm run build`
+---
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+</br>
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+## 프로젝트
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+1. 파이어베이스를 활용하여 `Authentication` 과 `Realtime Database` 활용 하여 `실시간 채팅사이트` 생성이 궁극적인 목표입니다.
+2. `openAI-API` 를 사용하여 토이프로젝트 만들고 더 나아가서, `chatGPT` 기능을 가진 사이트를 보며 적용해서 만들어 보겠다는 도전입니다.
+3. 팀 프로젝트 당시 `구글 로그인` 기능을 구현하지 못한 아쉬움이 크게 남았기 때문에, 기능구현을 추가 하였습니다.
+   </br>
 
-### `npm run eject`
+## 기능
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+1. `로그인(자체로그인 + 구글)` & 로그아웃 & `회원가입`(유효성검사+)
+2. `실시간 채팅기능`(채팅룸 생성 + 대화기능)
+3. `chatGPT` - API 활용하여 AI 대화 기능 추가하기
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+</br>
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+## 사용스택
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+<p>
+<img src="https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=JavaScript&logoColor=white"/>
+<img src="https://img.shields.io/badge/react-1572B6?style=for-the-badge&logo=react&logoColor=white"/>
+<img src="https://img.shields.io/badge/redux-7146B3?style=for-the-badge&logo=redux&logoColor=white"/>
+<img src="https://img.shields.io/badge/git-E34C26?style=for-the-badge&logo=git&logoColor=white">
+<img src="https://img.shields.io/badge/firebase-FFCA28?style=for-the-badge&logo=firebase&logoColor=white">
+</p>
 
-## Learn More
+</br>
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+## 화면 🖥️
 
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
-# chatProject
+</br>
