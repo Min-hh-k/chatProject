@@ -1,0 +1,136 @@
+body {
+  background: #0e101c;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+    sans-serif;
+}
+
+.registerWrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 70%;
+}
+
+.registerWrapper form {
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+.registerWrapper h1 {
+  font-weight: 100;
+  color: white;
+  text-align: center;
+  padding-bottom: 10px;
+  border-bottom: 1px solid rgb(79, 98, 148);
+}
+
+.registerWrapper .form {
+  background: #0e101c;
+  max-width: 700px;
+  margin: 0 auto;
+}
+
+.registerWrapper p {
+  color: #bf1650;
+}
+
+.registerWrapper p::before {
+  display: inline;
+  content: "⚠ ";
+}
+
+.registerWrapper input {
+  display: block;
+  box-sizing: border-box;
+  width: 80%;
+  border-radius: 4px;
+  border: 1px solid #494949;
+  padding: 10px 15px;
+  margin-bottom: 10px;
+  font-size: 14px;
+}
+
+.registerWrapper label {
+  line-height: 2;
+  text-align: left;
+  display: block;
+  margin-bottom: 13px;
+  color: #494949;
+  font-size: 14px;
+  font-weight: 200;
+}
+
+.registerWrapper button[type="submit"],
+.registerWrapper input[type="submit"] {
+  background: #ec5990;
+  color: white;
+  text-transform: uppercase;
+  border: none;
+  margin-top: 40px;
+  padding: 20px;
+  font-size: 16px;
+  font-weight: 500;
+  letter-spacing: 10px;
+}
+
+.registerWrapper button[type="submit"]:hover,
+.registerWrapper input[type="submit"]:hover {
+  background: #bf1650;
+}
+
+.registerWrapper button[type="submit"]:active,
+.registerWrapper input[type="button"]:active,
+.registerWrapper input[type="submit"]:active {
+  transition: 0.3s all;
+  transform: translateY(3px);
+  border: 1px solid transparent;
+  opacity: 0.8;
+}
+
+.registerWrapper input:disabled {
+  opacity: 0.4;
+}
+
+.registerWrapper input[type="button"]:hover {
+  transition: 0.3s all;
+}
+
+.registerWrapper button[type="submit"],
+.registerWrapper input[type="button"],
+.registerWrapper input[type="submit"] {
+  -webkit-appearance: none;
+}
+
+.registerWrapper button[type="button"] {
+  display: block;
+  appearance: none;
+  background: #333;
+  color: white;
+  border: none;
+  text-transform: uppercase;
+  padding: 10px 20px;
+  border-radius: 4px;
+}
+
+.registerWrapper hr {
+  margin-top: 30px;
+}
+
+.registerWrapper button {
+  display: block;
+  appearance: none;
+  margin-top: 40px;
+  border: 1px solid #333;
+  margin-bottom: 20px;
+  text-transform: uppercase;
+  padding: 10px 20px;
+  border-radius: 4px;
+}
+
+
+.registerWrapper span {
+  color:#bf1650;
+  font-size: 14px;
+}

@@ -5,7 +5,7 @@
 import { initializeApp } from "firebase/app";
 import { getAuth } from "firebase/auth";
 import {} from "firebase/storage";
-import {} from "firebase/database";
+import { getDatabase } from "firebase/database";
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
@@ -22,3 +22,8 @@ const app = initializeApp(firebaseConfig);
 
 // 인증 초기화 하기
 const appAuth = getAuth();
+
+// Initialize Realtime Database and get a reference to the service
+const database = getDatabase(app);
+
+export { app, appAuth, database };

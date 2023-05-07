@@ -28,7 +28,7 @@ root.render(
     <Provider
       store={createStoreMiddleware(
         rootReducer,
-        window.__REDUX_DEVTOOLS_EXTENSION__ &&
+        window.__REDUX__DEVTOOLS_EXTENSION__ &&
           window.__REDUX__DEVTOOLS_EXTENSION__()
       )}
     >
