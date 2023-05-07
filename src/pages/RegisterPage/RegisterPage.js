@@ -1,12 +1,12 @@
-import React, { useRef } from "react";
+import React, { useRef, useState } from "react";
 import { useForm } from "react-hook-form";
 import "./Register.css";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 import firebase from "../../firebase";
 import { appAuth } from "../../firebase";
-import { createUserWithEmailAndPassword } from "firebase/auth";
-
+import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
+import md5 from "md5";
 
 function RegisterPage() {
   const {
@@ -16,18 +16,47 @@ function RegisterPage() {
     formState: { errors },
   } = useForm();
 
+  //에러메시지
+  const [errorForm, setErrorForm] = useState("");
+
+  // 로딩 중 클릭 금지
+  const [loading, setLoading] = useState("");
+  
   //! 파이어베이스 회원가입
   const onSubmit = async (data) => {
     // data 에 입력 값 [이메일,네임,비번,비번확인] 들어 있음
-    console.log(data)
+    // console.log(data);
 
     try {
-      await createUserWithEmailAndPassword(appAuth, data.email, data.password)
+      // 파이어베이스 가입 POST
+      setLoading(true);
+      const register = await createUserWithEmailAndPassword(
+        appAuth,
+        data.email,
+        data.password
+      );
+      console.log(register);
 
+      // 파이어베이스 유저정보 업데이트 POST {displayName : 가입 이름, photoURL : md5(유니크한 값,email로 구분),그라바타 이용한 랜덤 이미지 포토}
+      const upProfile = await updateProfile(appAuth.currentUser, {
+        displayName: data.name,
+        photoURL: `https://www.gravatar.com/avatar/${md5(register.user.email)}?d=monsterid`,
+      });
+
+      console.log(upProfile);
+
+      // 파이어베이스 데이터베이스 저장
+
+      setLoading(false);
+    } catch (error) {
+      setErrorForm(error.message);
+      // console.log(error);
+      setLoading(false);
+      setTimeout(() => {
+        setErrorForm("");
+      }, 3000);
     }
-    catch {}
-
-  }
+  };
 
   // console.log(watch("email"));
 
@@ -36,7 +65,7 @@ function RegisterPage() {
 
   // watch 사용해서 패스워드 값 가져오기
   password.current = watch("password");
-  console.log(password.current)
+  console.log(password.current);
 
   return (
     <Wrapper>
@@ -88,7 +117,9 @@ function RegisterPage() {
             <span>비밀번호가 일치하지 않습니다!</span>
           )}
 
-        <input value="회원가입하기" type="submit" />
+        {errorForm && <span>{errorForm}</span>}
+
+        <input value="회원가입하기" type="submit" disabled={loading} />
 
         <Link to="/login" style={{ color: "#9999", textDecoration: "none" }}>
           로그인 하러가기
