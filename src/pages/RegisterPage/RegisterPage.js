@@ -3,7 +3,6 @@ import { useForm } from "react-hook-form";
 import "./Register.css";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
-import firebase from "../../firebase";
 import { appAuth } from "../../firebase";
 import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
 import md5 from "md5";
@@ -50,11 +49,10 @@ function RegisterPage() {
         )}?d=monsterid`,
       });
 
-
       // 파이어베이스 데이터베이스 저장
       // 테이블 users / 값 uid 고유값id >> {키:값} 정보들
 
-      set(ref(database,`users/${register.user.uid}`), {
+      set(ref(database, `users/${register.user.uid}`), {
         username: register.user.displayName,
         email: register.user.email,
         profile_picture: register.user.photoURL,
