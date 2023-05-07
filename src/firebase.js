@@ -5,7 +5,6 @@
 import { initializeApp } from "firebase/app";
 import { getAuth } from "firebase/auth";
 import {} from "firebase/storage";
-import { getDatabase } from "firebase/database";
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
@@ -15,6 +14,7 @@ const firebaseConfig = {
   storageBucket: process.env.REACT_APP_STORAGE_BUCKET,
   messagingSenderId: process.env.REACT_APP_MESSAGING_SENDER_ID,
   appId: process.env.REACT_APP_APP_ID,
+  databaseURL: process.env.REACT_APP_DATABASE_URL,
 };
 
 // Initialize Firebase
@@ -23,7 +23,4 @@ const app = initializeApp(firebaseConfig);
 // 인증 초기화 하기
 const appAuth = getAuth();
 
-// Initialize Realtime Database and get a reference to the service
-const database = getDatabase(app);
-
-export { app, appAuth, database };
+export { app, appAuth };
