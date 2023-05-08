@@ -9,10 +9,11 @@ import { Provider } from "react-redux";
 import { legacy_createStore as createStore, applyMiddleware } from "redux";
 import promiseMiddleware from "redux-promise";
 import ReduxThunk from "redux-thunk";
-import rootReducer from "./redux/reducer";
+import rootReducer from "./redux/reducer/index";
 
 // 붙스트랩
-import 'bootstrap/dist/css/bootstrap.min.css';
+import "bootstrap/dist/css/bootstrap.min.css";
+import { BrowserRouter } from "react-router-dom";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 
@@ -32,7 +33,9 @@ root.render(
           window.__REDUX__DEVTOOLS_EXTENSION__()
       )}
     >
-      <App />
+      <BrowserRouter>
+        <App />
+      </BrowserRouter>
     </Provider>
   </React.StrictMode>
 );

@@ -2,7 +2,7 @@ import React, { useRef, useState } from "react";
 import { useForm } from "react-hook-form";
 import "./Register.css";
 import styled from "styled-components";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { appAuth } from "../../firebase";
 import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
 import md5 from "md5";
@@ -24,6 +24,9 @@ function RegisterPage() {
 
   // 데이터베이스 가져오기
   const database = getDatabase();
+
+  // navigate
+  const navigate = useNavigate()
 
   //! 파이어베이스 회원가입
   const onSubmit = async (data) => {
@@ -59,6 +62,9 @@ function RegisterPage() {
       });
 
       setLoading(false);
+      
+      navigate('/login')
+      
     } catch (error) {
       setErrorForm(error.message);
       // console.log(error);

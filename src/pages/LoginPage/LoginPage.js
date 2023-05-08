@@ -2,10 +2,11 @@ import React, { useRef, useState } from "react";
 import { useForm } from "react-hook-form";
 import "./LoginPage.css";
 import styled from "styled-components";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { appAuth } from "../../firebase";
-import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
-import { getDatabase, ref, set } from "firebase/database";
+import { signInWithEmailAndPassword } from "firebase/auth";
+import { useDispatch, useSelector } from "react-redux";
+import setUser from "../../redux/actions/userAction";
 
 function LoginPage() {
   const {
@@ -21,18 +22,30 @@ function LoginPage() {
   // 로딩 중 클릭 금지
   const [loading, setLoading] = useState("");
 
-  // 데이터베이스 가져오기
-  const database = getDatabase();
+  // navigate
+  const navigate = useNavigate();
 
-  //! 파이어베이스 회원가입
+  const dispatch = useDispatch();
+  
+  //! 파이어베이스 로그인
   const onSubmit = async (data) => {
     // data 에 입력 값 [이메일,네임,비번,비번확인] 들어 있음
     // console.log(data);
 
     try {
       // 로그인
+      const login = await signInWithEmailAndPassword(
+        appAuth,
+        data.email,
+        data.password
+      );
+      // console.log(login);
 
       setLoading(false);
+      // dispatch(setUser(login))
+
+      // chat main page로 이동
+      navigate("/");
     } catch (error) {
       setErrorForm(error.message);
 
@@ -42,7 +55,6 @@ function LoginPage() {
       }, 3000);
     }
   };
-
 
   // 패스워드 입력 값
   const password = useRef();
