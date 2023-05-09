@@ -26,7 +26,7 @@ function RegisterPage() {
   const database = getDatabase();
 
   // navigate
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   //! 파이어베이스 회원가입
   const onSubmit = async (data) => {
@@ -61,9 +61,9 @@ function RegisterPage() {
         profile_picture: register.user.photoURL,
       });
 
+
       setLoading(false);
-      
-      navigate('/login')
+      // navigate("/login");
       
     } catch (error) {
       setErrorForm(error.message);

@@ -14,6 +14,13 @@ export default function (state = initialUserState, action) {
         currentUser: action.payload,
         isLoading: false,
       };
+    case "logoutUser":
+      return {
+        ...state,
+        currentUser: null,
+        isLoading: false,
+      };
+
     default:
       return state;
   }

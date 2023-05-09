@@ -8,7 +8,7 @@ import { onAuthStateChanged } from "firebase/auth";
 import { appAuth } from "./firebase";
 
 import { useDispatch, useSelector } from "react-redux";
-import setUser from "./redux/actions/userAction";
+import setUser, { logoutUser } from "./redux/actions/userAction";
 
 function App() {
   const navigate = useNavigate();
@@ -23,27 +23,31 @@ function App() {
       // 유저 정보
       // console.log(user);
 
+      //? 유저가 로그인 되어 있으면?
       if (user) {
-        // navigate("/");
         dispatch(setUser(user));
+        setTimeout(() => {
+          navigate("/");
+        }, 500);
       } else {
-        navigate("/login");
+        dispatch(logoutUser(user));
       }
     });
   }, []);
 
   // 로딩 시 적용
-  if (isLoading) {
-    <div>로딩중</div>
-  } else {
-    return (
-      <Routes>
-        <Route path="/" element={<ChatPage />} />
-        <Route path="/login" element={<LoginPage />} />
-        <Route path="/register" element={<RegisterPage />} />
-      </Routes>
-    );
-  }
+  // if (isLoading) {
+  //   <div style={{ fontSize: "100px" }}>로딩중</div>;
+  // } else {
+
+  // }
+  return (
+    <Routes>
+      <Route path="/" element={<ChatPage />} />
+      <Route path="/login" element={<LoginPage />} />
+      <Route path="/register" element={<RegisterPage />} />
+    </Routes>
+  );
 }
 
 export default App;

@@ -26,7 +26,10 @@ function LoginPage() {
   const navigate = useNavigate();
 
   const dispatch = useDispatch();
-  
+  // 리덕스 값 가져오기
+  const reduxValueTest = useSelector((state) => state.user);
+  console.log(reduxValueTest)
+
   //! 파이어베이스 로그인
   const onSubmit = async (data) => {
     // data 에 입력 값 [이메일,네임,비번,비번확인] 들어 있음
