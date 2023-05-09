@@ -4,9 +4,14 @@ import "./LoginPage.css";
 import styled from "styled-components";
 import { Link, useNavigate } from "react-router-dom";
 import { appAuth } from "../../firebase";
-import { signInWithEmailAndPassword } from "firebase/auth";
+import {
+  GoogleAuthProvider,
+  signInWithEmailAndPassword,
+  signInWithPopup,
+} from "firebase/auth";
 import { useDispatch, useSelector } from "react-redux";
 import setUser from "../../redux/actions/userAction";
+import GoogleLogin from "./GoogleLogin";
 
 function LoginPage() {
   const {
@@ -25,10 +30,11 @@ function LoginPage() {
   // navigate
   const navigate = useNavigate();
 
-  const dispatch = useDispatch();
-  // 리덕스 값 가져오기
+  // const dispatch = useDispatch();
+
+  // 리덕스 값 가져오기 테스트용
   const reduxValueTest = useSelector((state) => state.user);
-  console.log(reduxValueTest)
+  console.log(reduxValueTest);
 
   //! 파이어베이스 로그인
   const onSubmit = async (data) => {
@@ -66,6 +72,8 @@ function LoginPage() {
   password.current = watch("password");
   // console.log(password.current);
 
+
+
   return (
     <Wrapper>
       <Title>로그인</Title>
@@ -97,11 +105,12 @@ function LoginPage() {
         {errorForm && <span>{errorForm}</span>}
 
         <input value="로그인" type="submit" disabled={loading} />
-
-        <Link to="/register" style={{ color: "#9999", textDecoration: "none" }}>
-          회원가입 하러가기
-        </Link>
       </form>
+      <GoogleLogin />
+
+      <Link to="/register" style={{ color: "#9999", textDecoration: "none" }}>
+        회원가입 하러가기
+      </Link>
     </Wrapper>
   );
 }

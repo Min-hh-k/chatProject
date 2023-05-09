@@ -40,7 +40,7 @@ function UserScreen() {
   return (
     <div>
       <h3>
-        <IoIosChatboxes />
+        {/* <IoIosChatboxes /> */}
         chatProject
       </h3>
 
