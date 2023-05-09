@@ -4,7 +4,7 @@
 
 import { initializeApp } from "firebase/app";
 import { getAuth } from "firebase/auth";
-import {} from "firebase/storage";
+import { getStorage } from "firebase/storage";
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
@@ -23,4 +23,7 @@ const app = initializeApp(firebaseConfig);
 // 인증 초기화 하기
 const appAuth = getAuth();
 
-export { app, appAuth };
+// storage
+const storage = getStorage(app);
+
+export { app, appAuth, storage };
