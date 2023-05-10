@@ -20,6 +20,13 @@ export default function (state = initialUserState, action) {
         currentUser: null,
         isLoading: false,
       };
+      // 스토어에 currentUser 정보는 나두고 photoURL 만 payload 값 변경
+      case "updatePhotoURL":
+        return {
+          ...state,
+          currentUser: {...state.currentUser, photoURL : action.payload},
+          isLoading: false,
+        };
 
     default:
       return state;

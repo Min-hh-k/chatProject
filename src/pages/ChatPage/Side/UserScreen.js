@@ -4,20 +4,24 @@ import styled from "styled-components";
 import { IoIosChatboxes } from "react-icons/io";
 import Dropdown from "react-bootstrap/Dropdown";
 import Image from "react-bootstrap/Image";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { appAuth } from "../../../firebase";
-import { signOut } from "firebase/auth";
+import { signOut, updateProfile } from "firebase/auth";
 import { useNavigate } from "react-router-dom";
 import { storage } from "../../../firebase";
-import { ref, uploadBytes } from "firebase/storage";
+import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
+import { updatePhotoURL } from "../../../redux/actions/userAction";
+import { getDatabase, set, update, ref as refDb } from "firebase/database";
 
 function UserScreen() {
   const navigate = useNavigate();
 
   // 리덕스 스토어 > 로그아웃 & storage user.uid 사용
+  const dispatch = useDispatch();
   const user = useSelector((state) => state.user.currentUser);
-  console.log(user);
-  // storage user.uid
+  // console.log(user);
+
+  // storage user.uid 
   const userUid = user.uid;
 
   //! 로그아웃
@@ -28,15 +32,6 @@ function UserScreen() {
     setTimeout(() => {
       signOut(appAuth);
     }, 1000);
-
-    // .then(() => {
-    //   dispatch(logoutUser(user));
-    //   navigate('/login')
-    // })
-    // .catch((error) => {
-    //   console.log(error);
-    //   alert(error)
-    // });
   };
 
   //! 프로필 사진 변경
@@ -55,26 +50,51 @@ function UserScreen() {
     const file = e.target.files[0];
     console.log(file);
 
-    // if(userUid) {
-
-    // }
-
     const storageRef = ref(storage, userUid);
 
+    //! 프로필 사진 실시간 데이터베이스에 저장
+    // 데이터베이스 가져오기
+    const database = getDatabase();
+
     try {
-      //! 스토리지 파일 저장
+      //! 1. 스토리지 파일 저장
       await uploadBytes(storageRef, file).then(
         (snapshot) => {
-          console.log("Uploaded a blob or file!");
-          console.log(snapshot)
+          // console.log("Uploaded a blob or file!");
+          // console.log(snapshot);
         }
       );
+
+      //! 2. 스토리지 파일 업로드 했으니까, 다운받은거 변수에 담아서 -> 프로필 업데이트
+
+      // 업로드 된 사진, 스토리지에서 받아온거 담기
+      let downStoragePhotoUrl = await getDownloadURL(ref(storage, userUid));
+
+      // console.log(downStoragePhotoUrl);
+
+      // 파이어베이스 유저정보 업데이트
+      await updateProfile(appAuth.currentUser, {
+        photoURL: downStoragePhotoUrl,
+      });
+
+      //! 3. 리덕스 스토어도 업데이트 해주기
+      dispatch(updatePhotoURL(downStoragePhotoUrl));
+
+      //! 4. 실시간 데이터베이스에도 유저정보 업데이트 해주기
+      // 파이어베이스 데이터베이스 프로필 이미지 저장
+      // update 사용하여 ,테이블 users / 값 uid 고유값id >> {키:값} 정보들
+      //? 스토리지 ref와 데이터베이스 ref as refDb 로 구별
+
+      const uploadIMG = await update(refDb(database, `users/${userUid}`), {
+        profilePicture: downStoragePhotoUrl,
+      });
+
+      console.log(uploadIMG)
+
 
     } catch (err) {
       console.log(err);
     }
-
-
   };
 
   return (

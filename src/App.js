@@ -36,18 +36,18 @@ function App() {
   }, []);
 
   // 로딩 시 적용
-  // if (isLoading) {
-  //   <div style={{ fontSize: "100px" }}>로딩중</div>;
-  // } else {
+  if (isLoading) {
+    <div style={{ fontSize: "100px" }}>로딩중</div>;
+  } else {
+    return (
+      <Routes>
+        <Route path="/" element={<ChatPage />} />
+        <Route path="/login" element={<LoginPage />} />
+        <Route path="/register" element={<RegisterPage />} />
+      </Routes>
+    );
+  }
 
-  // }
-  return (
-    <Routes>
-      <Route path="/" element={<ChatPage />} />
-      <Route path="/login" element={<LoginPage />} />
-      <Route path="/register" element={<RegisterPage />} />
-    </Routes>
-  );
 }
 
 export default App;

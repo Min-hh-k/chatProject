@@ -58,7 +58,7 @@ function RegisterPage() {
       set(ref(database, `users/${register.user.uid}`), {
         username: register.user.displayName,
         email: register.user.email,
-        profile_picture: register.user.photoURL,
+        profilePicture: register.user.photoURL,
       });
 
 
