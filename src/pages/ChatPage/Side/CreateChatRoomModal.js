@@ -15,8 +15,9 @@ function CreateChatRoomModal(props) {
         </Modal.Header>
 
         <Modal.Body>
-          <p>채팅룸 이름을 입력하세요!</p>
-          <input type="text" onChange={(e) => {setRoomName(e.target.value)}}/>
+          <p>채팅룸 '이름'을 입력하세요!</p>
+          <input type="text" onChange={(e) => {setRoomName(e.target.value)}} style={{marginBottom:"1rem"}}/>
+          <p>채팅룸 '설명'을 입력하세요!</p>
           <input type="text" onChange={(e) => {setRoomDetail(e.target.value)}}/>
         </Modal.Body>
 
