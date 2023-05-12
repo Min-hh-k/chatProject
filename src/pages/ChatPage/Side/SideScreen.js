@@ -1,17 +1,16 @@
 import React from 'react'
 import styled from 'styled-components'
 import UserScreen from './UserScreen'
-import Likes from './Likes'
-import DM from './DM'
 import ChatRoom from './ChatRoom'
+import ChatGptRoom from './ChatGptRoom'
 
 function SideScreen() {
   return (
     <Wrapper>
       <UserScreen />
-      <Likes />
       <ChatRoom />
-      <DM />
+      <ChatGptRoom />
+
     </Wrapper>
   )
 }

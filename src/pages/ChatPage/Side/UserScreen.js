@@ -1,7 +1,6 @@
 import React, { useRef } from "react";
 import styled from "styled-components";
 
-import { IoIosChatboxes } from "react-icons/io";
 import Dropdown from "react-bootstrap/Dropdown";
 import Image from "react-bootstrap/Image";
 import { useDispatch, useSelector } from "react-redux";
@@ -21,17 +20,16 @@ function UserScreen() {
   const user = useSelector((state) => state.user.currentUser);
   // console.log(user);
 
-  // storage user.uid 
+  // storage user.uid
   const userUid = user.uid;
 
   //! 로그아웃
   const handleLogout = () => {
     navigate("/login");
+    signOut(appAuth);
 
     // 리덕스 스토어에서 정보가 바로 나가니까 이름이나 프로필 사진랜더링 에러 방지 위해 setTimeout
-    setTimeout(() => {
-      signOut(appAuth);
-    }, 1000);
+    // setTimeout(() => {}, 1000);
   };
 
   //! 프로필 사진 변경
@@ -58,19 +56,15 @@ function UserScreen() {
 
     try {
       //! 1. 스토리지 파일 저장
-      await uploadBytes(storageRef, file).then(
-        (snapshot) => {
-          // console.log("Uploaded a blob or file!");
-          // console.log(snapshot);
-        }
-      );
+      await uploadBytes(storageRef, file).then((snapshot) => {
+        // console.log("Uploaded a blob or file!");
+        // console.log(snapshot);
+      });
 
       //! 2. 스토리지 파일 업로드 했으니까, 다운받은거 변수에 담아서 -> 프로필 업데이트
 
       // 업로드 된 사진, 스토리지에서 받아온거 담기
       let downStoragePhotoUrl = await getDownloadURL(ref(storage, userUid));
-
-      // console.log(downStoragePhotoUrl);
 
       // 파이어베이스 유저정보 업데이트
       await updateProfile(appAuth.currentUser, {
@@ -89,9 +83,7 @@ function UserScreen() {
         profilePicture: downStoragePhotoUrl,
       });
 
-      console.log(uploadIMG)
-
-
+      // console.log(uploadIMG);
     } catch (err) {
       console.log(err);
     }
@@ -100,7 +92,6 @@ function UserScreen() {
   return (
     <div>
       <h3>
-        {/* <IoIosChatboxes /> */}
         chatProject
       </h3>
 
@@ -127,7 +118,7 @@ function UserScreen() {
             onChange={uploadImg}
           />
           <Dropdown.Menu>
-            <Dropdown.Item onClick={changeProfileImg}>사진변경</Dropdown.Item>
+            <Dropdown.Item onClick={changeProfileImg}>프로필 사진 변경</Dropdown.Item>
             <Dropdown.Item onClick={handleLogout}>로그아웃</Dropdown.Item>
           </Dropdown.Menu>
         </Dropdown>
