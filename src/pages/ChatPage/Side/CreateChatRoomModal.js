@@ -1,28 +1,38 @@
-import Button from 'react-bootstrap/Button';
-import Modal from 'react-bootstrap/Modal';
+import Button from "react-bootstrap/Button";
+import Modal from "react-bootstrap/Modal";
+import styled from "styled-components";
 
-function CreateChatRoomModal() {
+function CreateChatRoomModal(props) {
+  const { handleClickCloseModal, setRoomName, setRoomDetail ,handleSubmit } = props;
   return (
-    <div
+    <Wrapper
       className="modal show"
-      style={{ display: 'block', position: 'initial' }}
+      style={{ display: "block", position: "initial", color: "black" }}
     >
       <Modal.Dialog>
-        <Modal.Header closeButton>
-          <Modal.Title>Modal title</Modal.Title>
+        <Modal.Header>
+          <Modal.Title>채팅방 생성</Modal.Title>
         </Modal.Header>
 
         <Modal.Body>
-          <p>Modal body text goes here.</p>
+          <p>채팅룸 이름을 입력하세요!</p>
+          <input type="text" onChange={(e) => {setRoomName(e.target.value)}}/>
+          <input type="text" onChange={(e) => {setRoomDetail(e.target.value)}}/>
         </Modal.Body>
 
         <Modal.Footer>
-          <Button variant="secondary">Close</Button>
-          <Button variant="primary">Save changes</Button>
+          <Button variant="secondary" onClick={handleClickCloseModal}>
+            Close
+          </Button>
+          <Button style={{ backgroundColor: "yellowgreen",border: "none" }} onClick={handleSubmit}>Save changes</Button>
         </Modal.Footer>
       </Modal.Dialog>
-    </div>
+    </Wrapper>
   );
 }
 
 export default CreateChatRoomModal;
+
+const Wrapper = styled.div`
+
+`
