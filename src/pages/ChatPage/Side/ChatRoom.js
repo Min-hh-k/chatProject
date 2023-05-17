@@ -10,18 +10,24 @@ import React, { useEffect, useState } from "react";
 import { BiMessageAdd } from "react-icons/bi";
 import styled from "styled-components";
 import CreateChatRoomModal from "./CreateChatRoomModal";
+import { useDispatch } from "react-redux";
+import setCurrentChannel from "../../../redux/actions/channelAction";
 
 function ChatRoom() {
+  const database = getDatabase();
+
   const [modalOpen, setModalOpen] = useState(false);
   const [roomName, setRoomName] = useState("");
   const [roomDetail, setRoomDetail] = useState("");
 
   //채팅방
   const [channels, setChannels] = useState([]);
-
-  const database = getDatabase();
+  const [activeChannelId, setActiveChannelID] = useState("");
+  const [firstLoaded, setFirstLoaded] = useState(true);
 
   //
+  const dispatch = useDispatch();
+
   //! 채팅방 정보 가져오기
   useEffect(() => {
     const unsubscribe = onChildAdded(ref(database, `channels`), (snapshot) => {
@@ -67,38 +73,57 @@ function ChatRoom() {
     }
   };
 
+  // 채팅방 클릭 시 채널 전환
+  const changeChannel = (channel) => {
+    setActiveChannelID(channel.id);
+    dispatch(setCurrentChannel(channel));
+  };
+
+  // 첫 채널 랜더링
+  useEffect(() => {
+    const firstChannel = channels[0];
+
+    if (channels.length > 0 && firstLoaded) {
+      setActiveChannelID(firstChannel);
+      dispatch(setCurrentChannel(firstChannel));
+      setFirstLoaded(false);
+    }
+  }, [channels, dispatch, firstLoaded]);
+
   return (
     <>
-    <Wrapper>
-      {/* <FaRegSmileWink style={{ marginRight: 3 }} /> */}
-      <div>
-        ChatRooms{" "}
-        <BiMessageAdd
-          onClick={handleClickOpenModal}
-          style={{ marginLeft: 3, fontSize: "1.3rem", cursor: "pointer" }}
-        />
-        {modalOpen && (
-          <CreateChatRoomModal
-            modalOpen={modalOpen}
-            handleClickCloseModal={handleClickCloseModal}
-            setRoomName={setRoomName}
-            setRoomDetail={setRoomDetail}
-            handleSubmit={handleSubmit}
+      <Wrapper>
+        {/* <FaRegSmileWink style={{ marginRight: 3 }} /> */}
+        <div>
+          ChatRooms{" "}
+          <BiMessageAdd
+            onClick={handleClickOpenModal}
+            style={{ marginLeft: 3, fontSize: "1.3rem", cursor: "pointer" }}
           />
-        )}
-      </div>
-
-
-    </Wrapper>
-    <ChannelsWrapper>
+          {modalOpen && (
+            <CreateChatRoomModal
+              modalOpen={modalOpen}
+              handleClickCloseModal={handleClickCloseModal}
+              setRoomName={setRoomName}
+              setRoomDetail={setRoomDetail}
+              handleSubmit={handleSubmit}
+            />
+          )}
+        </div>
+      </Wrapper>
+      <ChannelsWrapper>
         {channels.map((el) => (
-          <div key={el.id}>
-            <p>{el.name}</p>
-          </div>
+          <ChannelsInnerWrapper key={el.id}>
+            <button
+              onClick={() => changeChannel(channels)}
+              // onSelect={channels.id === activeChannelId }
+            >
+              {el.name}
+            </button>
+          </ChannelsInnerWrapper>
         ))}
       </ChannelsWrapper>
     </>
-
   );
 }
 
@@ -115,4 +140,20 @@ const Wrapper = styled.div`
 const ChannelsWrapper = styled.div`
   display: flex;
   flex-direction: column;
+`;
+
+const ChannelsInnerWrapper = styled.div`
+  display: flex;
+
+  button {
+    border: none;
+    background-color: #777777;
+    font-size: 1.3rem;
+    padding: 10px;
+    color: #ffffff;
+
+    :hover {
+      color: #f67745;
+    }
+  }
 `;

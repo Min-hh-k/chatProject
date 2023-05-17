@@ -14,6 +14,7 @@ import rootReducer from "./redux/reducer/index";
 // 붙스트랩
 import "bootstrap/dist/css/bootstrap.min.css";
 import { BrowserRouter } from "react-router-dom";
+import { composeWithDevTools } from "redux-devtools-extension";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 
@@ -29,8 +30,7 @@ root.render(
     <Provider
       store={createStoreMiddleware(
         rootReducer,
-        window.__REDUX__DEVTOOLS_EXTENSION__ &&
-          window.__REDUX__DEVTOOLS_EXTENSION__()
+        composeWithDevTools()
       )}
     >
       <BrowserRouter>
