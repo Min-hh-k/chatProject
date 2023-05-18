@@ -1,19 +1,23 @@
 import React from "react";
 import styled from "styled-components";
-import MessageHeader from "./MessageHeader";
-import MessageForm from "./MessageForm";
+import ChatHeader from "./ChatHeader";
+import ChatForm from "./ChatForm";
+import { useSelector } from "react-redux";
 
-function MainScreen() {
+function Chat() {
+
+  const {channel} = useSelector((state)=> state)
+
   return (
     <Wrapper>
-      <MessageHeader />
-      <Box></Box>
-      <MessageForm />
+      <ChatHeader channelInfo={channel}/>
+      <Box>Chat</Box>
+      <ChatForm />
     </Wrapper>
   );
 }
 
-export default MainScreen;
+export default Chat;
 
 const Wrapper = styled.div`
   display: flex;
@@ -21,7 +25,7 @@ const Wrapper = styled.div`
   justify-content: center;
   /* align-items: flex-start; */
   /* margin: 1rem; */
-  padding: 2rem  2rem 0 2rem;
+  padding: 2rem 2rem 0 2rem;
 `;
 
 const Box = styled.div`
