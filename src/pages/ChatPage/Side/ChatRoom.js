@@ -6,7 +6,7 @@ import {
   ref,
   update,
 } from "firebase/database";
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { BiMessageAdd } from "react-icons/bi";
 import styled from "styled-components";
 import CreateChatRoomModal from "./CreateChatRoomModal";
@@ -21,6 +21,7 @@ function ChatRoom() {
   const [roomDetail, setRoomDetail] = useState("");
 
   //채팅방
+  const [channel, setChannel] = useState([]);
   const [channels, setChannels] = useState([]);
   const [activeChannelId, setActiveChannelID] = useState("");
   const [firstLoaded, setFirstLoaded] = useState(true);
@@ -76,11 +77,13 @@ function ChatRoom() {
 
   // 채팅방 클릭 시 채널 전환, redux
   const changeChannel = (channel) => {
-    if (channel.id === activeChannelId) return;
+    // if (channel.id === activeChannelId) return;
 
     setActiveChannelID(channel.id);
     dispatch(setCurrentChannel(channel));
   };
+
+  // console.log(activeChannelId)
 
   // 첫 채널 랜더링
   useEffect(() => {
@@ -96,7 +99,6 @@ function ChatRoom() {
   return (
     <>
       <Wrapper>
-        {/* <FaRegSmileWink style={{ marginRight: 3 }} /> */}
         <div>
           ChatRooms{" "}
           <BiMessageAdd
@@ -118,8 +120,8 @@ function ChatRoom() {
         {channels.map((el) => (
           <ChannelsInnerWrapper key={el.id}>
             <button
-              onClick={() => changeChannel(channels)}
-              // onSelect={channels.id === activeChannelId }
+              onClick={() => changeChannel(el)}
+              className={el.id === activeChannelId ? "active" : ""}
             >
               {el.name}
             </button>
@@ -156,6 +158,9 @@ const ChannelsInnerWrapper = styled.div`
     color: #ffffff;
 
     :hover {
+      color: #f67745;
+    }
+    &.active {
       color: #f67745;
     }
   }
