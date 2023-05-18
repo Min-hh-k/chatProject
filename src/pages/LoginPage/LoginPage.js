@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useCallback, useRef, useState } from "react";
 import { useForm } from "react-hook-form";
 import "./LoginPage.css";
 import styled from "styled-components";
@@ -37,7 +37,7 @@ function LoginPage() {
   console.log(reduxValueTest);
 
   //! 파이어베이스 로그인
-  const onSubmit = async (data) => {
+  const onSubmit = useCallback(async (data) => {
     // data 에 입력 값 [이메일,네임,비번,비번확인] 들어 있음
     // console.log(data);
 
@@ -63,7 +63,7 @@ function LoginPage() {
         setErrorForm("");
       }, 3000);
     }
-  };
+  },[]) 
 
   // 패스워드 입력 값
   const password = useRef();

@@ -39,6 +39,7 @@ function ChatRoom() {
     };
   }, []);
 
+  // 채널 생성 확인
   useEffect(() => {
     console.log(channels);
   }, [channels]);
@@ -73,8 +74,10 @@ function ChatRoom() {
     }
   };
 
-  // 채팅방 클릭 시 채널 전환
+  // 채팅방 클릭 시 채널 전환, redux
   const changeChannel = (channel) => {
+    if (channel.id === activeChannelId) return;
+
     setActiveChannelID(channel.id);
     dispatch(setCurrentChannel(channel));
   };

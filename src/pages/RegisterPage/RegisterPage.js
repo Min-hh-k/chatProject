@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useCallback, useRef, useState } from "react";
 import { useForm } from "react-hook-form";
 import "./Register.css";
 import styled from "styled-components";
@@ -29,7 +29,7 @@ function RegisterPage() {
   const navigate = useNavigate();
 
   //! 파이어베이스 회원가입
-  const onSubmit = async (data) => {
+  const onSubmit = useCallback(async (data) => {
     // data 에 입력 값 [이메일,네임,비번,비번확인] 들어 있음
     // console.log(data);
 
@@ -61,10 +61,8 @@ function RegisterPage() {
         profilePicture: register.user.photoURL,
       });
 
-
       setLoading(false);
       // navigate("/login");
-      
     } catch (error) {
       setErrorForm(error.message);
       // console.log(error);
@@ -73,7 +71,7 @@ function RegisterPage() {
         setErrorForm("");
       }, 3000);
     }
-  };
+  }, []);
 
   // console.log(watch("email"));
 
