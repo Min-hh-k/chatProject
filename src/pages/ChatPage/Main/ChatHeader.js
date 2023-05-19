@@ -1,8 +1,14 @@
 import React from 'react'
 
-function ChatHeader({channelInfo}) {
+function ChatHeader({channel}) {
+  console.log(channel)
+  
   return (
-    <div>채널명 : {channelInfo} </div>
+    <>
+    <div># {channel.chatroom.currentChannel.name} </div>
+    <div>{channel.chatroom.currentChannel.details}</div>
+    </>
+
   )
 }
 

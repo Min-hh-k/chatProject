@@ -21,7 +21,6 @@ function ChatRoom() {
   const [roomDetail, setRoomDetail] = useState("");
 
   //채팅방
-  const [channel, setChannel] = useState([]);
   const [channels, setChannels] = useState([]);
   const [activeChannelId, setActiveChannelID] = useState("");
   const [firstLoaded, setFirstLoaded] = useState(true);
@@ -41,9 +40,9 @@ function ChatRoom() {
   }, []);
 
   // 채널 생성 확인
-  useEffect(() => {
-    console.log(channels);
-  }, [channels]);
+  // useEffect(() => {
+  //   console.log(channels);
+  // }, [channels]);
 
   // 채팅방 생성 모달 열고 닫기
   const handleClickOpenModal = () => {
@@ -77,7 +76,7 @@ function ChatRoom() {
 
   // 채팅방 클릭 시 채널 전환, redux
   const changeChannel = (channel) => {
-    // if (channel.id === activeChannelId) return;
+    if (channel.id === activeChannelId) return;
 
     setActiveChannelID(channel.id);
     dispatch(setCurrentChannel(channel));

@@ -5,16 +5,23 @@ import ChatForm from "./ChatForm";
 import { useSelector } from "react-redux";
 
 function Chat() {
+  const channel = useSelector((state) => state);
+  // console.log(channel)
 
-  const {channel} = useSelector((state)=> state)
+  // 리덕스 값 가져오기
+  const isLoading = useSelector((state) => state.chatroom.isLoading);
 
-  return (
-    <Wrapper>
-      <ChatHeader channelInfo={channel}/>
-      <Box>Chat</Box>
-      <ChatForm />
-    </Wrapper>
-  );
+  if (isLoading) {
+    <div style={{ fontSize: "100px" }}>로딩중</div>;
+  } else {
+    return (
+      <Wrapper>
+        <ChatHeader channel={channel} />
+        <Box>Chat</Box>
+        <ChatForm />
+      </Wrapper>
+    );
+  }
 }
 
 export default Chat;

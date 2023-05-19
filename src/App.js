@@ -26,8 +26,9 @@ function App() {
       //? 유저가 로그인 되어 있으면?
       if (user) {
         dispatch(setUser(user));
+        navigate("/");
         setTimeout(() => {
-          navigate("/");
+
         }, 500);
       } else {
         dispatch(logoutUser(user));
